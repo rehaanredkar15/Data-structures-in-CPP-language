@@ -1,0 +1,84 @@
+#include <iostream>
+
+using namespace std;
+
+void merge( int *a , int *r , int  *l , int lc ,int rc ) //the entities are changed to lc and rc for convenience and arrays are received by reference
+{
+    int i=0;
+    int j = 0;
+    int k = 0;
+    while( i < lc && j < rc)  // to run the loop till the entities of the arrays
+    {
+        if ( r[i] < l[j] )    /* if the element in the r divided array is smaller than the left divided array
+                                 than the element is swapped into the array at zero position*/
+        {
+            a[k++] = r[i++];    /*VIMP - the post incrementation is used bcoz after the assignment both values should increase
+                                so the next element if bigger should be placed at right position otherwise if it is smaller it will be compared
+                                    with already elements present there in the array an placed accordingly*/
+        }
+        else
+        {
+            a[k++] = l[j++];
+        }
+    }
+    while ( i < lc )    /*now here if the elements in one divided array is higher than  the value of i will increase and there will no need to swap the
+                          remaining elements and they can be admitted according to their size in the array a*/
+    {
+        a[k++] = r[i++];
+    }
+    while  ( j < rc )
+    {
+        a[k++] = l[j++];
+    }
+}
+void mergesort( int *a, int n)       /* definition of function  dividing the elements */
+{
+    int i,j,mid=0;
+    if ( n < 2)                       //if there is only 1 element in the array return back
+    {
+        return ;
+    }
+    else
+    {
+        mid = n/2;                          //calculating mid to divide the array into two parts
+        int r[mid],l[n-mid];                   // giving the the divided length to arrays
+        for( i = 0 ; i < mid ; i++)                // loop for putting elements in the 1st divided part
+        {
+            r[i] = a [i];
+        }
+        for( i = mid ; i < n ; i++)            //  loop for putting elements in the 2nd divided part
+        {
+            l[i-mid] = a[i];                   /* moving the elements from array a to 2nd divided part
+                                                    i-mid is done bcoz the indexes of 2nd part starts from middle element hence
+                                                    that no is subtracted from mid */
+        }
+        mergesort( r , mid );                       // the  call for same function that is the recursion to divide untill 1 element remains
+        mergesort( l , n-mid );              //the call to divide the 2nd half of the main array
+                                            /* the calls are given until one element remains when both arrays
+                                            contain 1 element the merge function is called (bcoz of recursive calling the values of
+                                            mid and n is reduced everytime as they are divided by 2 everytime)*/
+
+        merge( a , r , l , mid , n-mid);   /*call for the merge function to merge the
+                                            elements the parameters given are array a
+                                            , the two divided arrays r and l , their entities
+                                            i.e their end limits*/
+    }
+}
+int main()
+{
+    cout<<"THIS IS MERGE SORT"<<endl;
+    int  a[1000],n,i=0;
+    cout<<"enter the no of elements :"<<endl;
+    cin>>n;
+    while(i<n)
+    {
+        cin>>a[i];     // array input
+        i++;
+    }
+    mergesort( a , n);     // call for dividing the elements  of array a
+    for(i=0;i<n;i++)
+    {
+        cout<<a[i];
+    }
+    return 0;
+}
