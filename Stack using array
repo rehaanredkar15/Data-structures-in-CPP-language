@@ -1,0 +1,88 @@
+#include<iostream>
+#include<string.h>
+#include <iostream>
+#include <iterator>
+#include <map>
+int top=0;
+using namespace std;
+class stck
+{
+public:
+    void push(int *a )
+    {
+        int l,p,i;
+        cout<<"enter the amount of numbers to be pushed ";
+        cin>>p;
+        cout<<"enter the elements to be entered in the stack"<<endl;
+        for(i=0;i<p;i++)
+        {
+            cin>>l;
+            if(top == 10)
+           {
+               cout<<"stack overflow";
+            }
+          else
+           {
+            top++;
+            a[top] = l;
+         
+            }
+        }
+    }
+    void pop(int *a)
+    {
+        int s;
+        cout<<"poping the top element from stack";
+        if(top == 0)
+        {
+            cout<<"stack is underflow";
+        }
+        else
+        {
+            s = top;
+            top = top - 1;
+        }
+        
+    }
+    void display(int *a)
+    { 
+        int  i;
+        for(i=top;i > 0 ;i--)
+        {
+            cout<<"\t"<<a[i]<<endl;
+        }
+    }
+};
+
+int main()
+{
+    int i;
+    char f;
+    int n,m=0,j,u=0;
+    int a[10] = {};
+    a:
+    cout<<"enter your choice 1. push 2.pop 3.display "<<endl;
+    cin>>m;
+    switch(m)
+     {
+        case 1: stck p;
+                p.push(a);
+                break;
+        case 2: stck u;
+                u.pop(a);
+                break;
+        case 3:stck o;
+                o.display(a);
+                break;\
+        default:cout<<"wrong choice"<<endl;
+                break;
+      }
+      cout<<endl<<"If you want to perform more operations press y else press any other key."<<endl;
+      cin>>f ;
+     // cout<<f;
+      if (f  == 'y' || f == 'Y')
+       {
+          goto a;
+       }
+      return 0;
+}
