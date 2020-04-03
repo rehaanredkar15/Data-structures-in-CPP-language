@@ -1,0 +1,99 @@
+#include<iostream>
+#include<string.h>
+#include <iostream>
+#include <iterator>
+#include <map>
+using namespace std;
+int front = -1;
+int rear = -1;
+#define n 7;
+int a[7];
+
+class stck
+{
+public:
+    void enqueue( )
+    {
+        int l,p,i,g=0;
+        cout<<"enter the amount of numbers to be entered ";
+        cin>>p;
+        cout<<"enter the elements to be entered in the queue" <<endl;
+        for(i=0;i<p;i++)
+        {
+            cin>>l;
+            g = (rear+1)%n;
+            if(g == front)
+           {
+               cout<<"queue overflow";
+            }
+          else if (front == -1 && rear == -1)
+           {
+              front = rear = 0;
+              a[rear] = l;
+            }
+            else
+            {
+                rear = g ;
+                a[rear] = l;
+            }
+        }
+    }
+    void dequeue()
+    {
+        int s;
+        cout<<"removing  the front element from queue";
+        if(front == -1)
+        {
+            cout<<"There is no element in the queue";
+        }
+        else if(front == rear)
+        {
+            front = rear = -1;
+        }
+        else
+        {
+            front = (front+1)%n;  
+        }
+        
+        
+    }
+    void display()
+    { 
+        int  i;
+        for(i=front;i < rear+1 ; i++)
+        {
+            cout<<"\t"<<a[i]<<endl;
+        }
+    }
+};
+
+int main()
+{
+    int i;
+    char f;
+    int m=0,j,u=0;
+    c:
+    cout<<"enter your choice 1.enqueue 2.dequeue 3.display "<<endl;
+    cin>>m;
+    switch(m)
+     {
+        case 1: stck p;
+                p.enqueue();
+                break;
+        case 2: stck u;
+                u.dequeue();
+                break;
+        case 3:stck o;
+                o.display();
+                break;
+        default:cout<<"wrong choice"<<endl;
+                break;
+      }
+      cout<<endl<<"If you want to perform more operations press y else press any other key."<<endl;
+      cin>>f ;
+     // cout<<f;
+      if (f  == 'y' || f == 'Y')
+        goto c;
+       
+      return 0;
+}
