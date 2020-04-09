@@ -1,0 +1,139 @@
+#include<iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node* head;
+void insert(int n)
+{
+     node *temp = new node();
+     temp -> data = n;
+     temp -> next = NULL;
+     if (head != NULL);
+     {
+          temp -> next =  head;
+     }
+     head = temp;
+}
+void print()
+{
+      cout<<endl<<"now we print the list";
+     struct node *temp2 = head;
+     cout<<endl<<"the list is "<<endl;
+     while(temp2 != NULL)
+     {
+          cout<<" "<<temp2 -> data;
+          temp2 = temp2 -> next;
+     }
+}
+void insert2()
+{
+        int a,info;
+        cout<<endl<<"where do you want to insert the new node ??give the position";
+      cin>>a;
+
+      cout<<endl<<"enter the info /no at the  node ";
+      cin>>info;
+
+    int i;
+    if(a== 1)
+    {
+        insert(info);
+    }
+    struct node *temp = new node();
+    temp ->data = info;
+    temp ->next = NULL;
+    struct node *temp2 = head;
+    for(i=0;i<a-2;i++)
+    {
+        temp2 = temp2 -> next;
+    }
+    temp->next =  temp2 ->next ;
+    temp2 -> next =  temp;
+}
+void  reversestring()
+{
+    struct node *current,*temp,*prev;
+    current =  head;
+    prev =  NULL;
+    while(current != NULL)
+    {
+        temp = current->next;
+        current ->next = prev;
+        prev = current;
+        current = temp;
+    }
+    head = prev;
+}
+void del(int pos)
+{
+
+    cout<<endl<<"delete node from the linked list";
+    cout<<endl<<"give the position of the node to be removed";
+    cin>>pos;
+    int i;
+    struct node *tempo = head;
+     struct node *tempo2 = head;
+    if(pos == 1)
+    {
+     int i;
+     for(i=1;i<pos;i++)
+     {
+         tempo = tempo -> next;
+     }
+     head =  tempo -> next;
+    }
+     for(i=1;i<pos;i++)
+     {
+         tempo = tempo -> next;
+     }
+         for(i=1;i<pos-1;i++)
+     {
+         tempo2 = tempo2 -> next;
+     }
+     tempo2 ->next = tempo->next;
+}
+int main()
+{
+     head = NULL;
+     int i,n,a,info,pos,r,y;
+     char o;
+      cout<<"first we will create a linked list with 3 elements where nos are added at the begining";
+           cout<<endl<<"enter the 3 elements to be entered in the list";
+      for(i=0;i<3;i++)
+      {
+           cin>>n;
+           insert(n);
+      }
+      r:
+      cout<<endl<<"select the function you want to perform"<<endl<< " 1:insert at the starting"<<endl<< "2:insert at a desired position" <<endl<<"3:delete at desired position "<<endl<<"4:print the list "<<endl;
+      cout<<endl<<"5:reversestring "<<endl;
+      cin>>y;
+
+      switch(y)
+      {
+              case 1 :cout<<endl<<"enter the info /no at the  node ";
+                        cin>>info;
+                       insert(info);
+                         break;
+              case 2 : insert2();
+                          break;
+              case 3 : del(pos);
+                           break;
+              case 4 : print();
+                         break;
+              case 5 : reversestring();
+                        break ;
+              default : cout<<"wrong choice";
+      }
+      cout<<endl<<"do you want to continue performing operations on the list?? if yes then press y otherwise press any key"<<endl;
+      cin>>o;
+      if (o == 'y')
+      {
+          goto r;
+      }
+
+   return 0;
+}
